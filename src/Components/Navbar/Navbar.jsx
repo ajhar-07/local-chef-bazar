@@ -1,7 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router';
+import useAuth from '../../Hooks/useAuth';
 
 const Navbar = () => {
+  const {user,signOutuser}=useAuth()
   const links = (
     <>
       <li>
@@ -14,14 +16,28 @@ const Navbar = () => {
           Meals
         </NavLink>
       </li>
-      <li>
+     {
+      user&&  <li>
         <NavLink className="px-4 py-2 rounded-lg hover:bg-emerald-500 hover:text-white transition-all">
           Dashboard
         </NavLink>
       </li>
+     }
     </>
   );
 
+
+  const handlelogout=()=>{
+    signOutuser()
+    .then(()=>{
+      alert("Logout Successfully")
+    })
+    .catch(error=>{
+      alert(error.message)
+      console.log(error);
+      
+    })
+  }
   return (
     <div className="bg-white shadow-md py-3">
       <div className="navbar w-11/12 mx-auto px-4">
@@ -66,9 +82,11 @@ const Navbar = () => {
             className="w-10 h-10 rounded-full border shadow-sm"
           />
 
-          <NavLink to={'/login'} className="px-5 py-2 rounded-lg bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-all shadow">
+         {
+          user ?<button onClick={handlelogout} className="px-5 py-2 rounded-lg bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-all shadow">Logout</button> :  <NavLink to={'/login'} className="px-5 py-2 rounded-lg bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-all shadow">
             Login
           </NavLink>
+         }
         </div>
         
       </div>
