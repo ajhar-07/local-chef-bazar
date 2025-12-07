@@ -66,7 +66,7 @@ const Navbar = () => {
             className="w-10 h-10 rounded-full border shadow-sm"
           />
 
-          <NavLink className="px-5 py-2 rounded-lg bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-all shadow">
+          <NavLink to={'/login'} className="px-5 py-2 rounded-lg bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-all shadow">
             Login
           </NavLink>
         </div>
