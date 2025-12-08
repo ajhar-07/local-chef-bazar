@@ -18,7 +18,7 @@ const Navbar = () => {
       </li>
      {
       user&&  <li>
-        <NavLink className="px-4 py-2 rounded-lg hover:bg-emerald-500 hover:text-white transition-all">
+        <NavLink to={'/dashboard'} className="px-4 py-2 rounded-lg hover:bg-emerald-500 hover:text-white transition-all">
           Dashboard
         </NavLink>
       </li>
@@ -76,11 +76,10 @@ const Navbar = () => {
         </div>
 
         <div className="navbar-end flex items-center gap-3">
-          <img
-            src="https://i.ibb.co/8D7t5tX/user.png"
-            alt="user"
-            className="w-10 h-10 rounded-full border shadow-sm"
-          />
+         {
+          user ? <img src={user.photoURL} alt="" className='w-10 h-10 mask-cover rounded-full' />:
+          ""
+         }
 
          {
           user ?<button onClick={handlelogout} className="px-5 py-2 rounded-lg bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-all shadow">Logout</button> :  <NavLink to={'/login'} className="px-5 py-2 rounded-lg bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-all shadow">

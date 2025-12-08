@@ -4,6 +4,7 @@ import Mainlayout from '../Layouts/Mainlayout';
 import Home from '../Pages/Home/Home';
 import Login from '../Pages/Home/Authotication/Login';
 import Register from '../Pages/Home/Authotication/Register';
+import Dashboard from '../Layouts/Dashboard';
 
 export const router=createBrowserRouter([
     {path:'/', element:<Mainlayout/>,
@@ -13,4 +14,6 @@ export const router=createBrowserRouter([
     },
     {path:'/login', element:<Login></Login>},
     {path:'/register',element:<Register></Register>},
+
+    {path:'/dashboard', element:<Dashboard></Dashboard>}
 ])

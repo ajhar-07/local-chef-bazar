@@ -3,35 +3,53 @@ import { Link } from "react-router";
 import { FcGoogle } from "react-icons/fc";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../Hooks/useAuth";
+import { saveOrupdateUser } from "../../../Utils";
 
 const Register = () => {
-  const { registerUser, loginwithGoogle } = useAuth();
+  const { registerUser, loginwithGoogle,updateUser } = useAuth();
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
 
-  const handleRegister = (data) => {
+  const handleRegister = async (data) => {
     console.log(data);
     registerUser(data.email, data.password, data.name, data.photo)
       .then(result => {
         console.log(result.user);
         alert("Register Successfully");
+        updateUser({
+        displayName: data.name,
+        photoURL: data.photo 
+      })
+
+     
       })
       .catch(error => {
         console.log(error);
         alert(error.message);
       });
+     await saveOrupdateUser({name:data?.name,email:data?.email,photo:data?.photo})
+
   };
 
-  const handleGoogleRegister = () => {
-    loginwithGoogle()
-      .then(result => {
-        console.log(result.user);
-        alert("Register Successfully");
-      })
-      .catch(error => {
-        console.log(error);
-        alert(error.message);
-      });
-  };
+  const handleGoogleRegister = async () => {
+  try {
+    const result = await loginwithGoogle();
+    const user = result.user;
+
+    console.log(user);
+    alert("Register Successfully");
+
+    await saveOrupdateUser({
+      name: user.displayName,
+      email: user.email,
+      photo: user.photoURL,
+    });
+
+  } catch (error) {
+    console.log(error);
+    alert(error.message);
+  }
+};
+
 
   const password = watch("password"); 
 
@@ -69,8 +87,8 @@ const Register = () => {
           <div>
             <label className="block text-gray-700 font-medium mb-1">Profile Photo</label>
             <input
-              type="file"
-              accept="image/*"
+              type="link"
+              plaseholder="Enter photo url"
               {...register("photo", { required: true })}
               className="w-full px-3 py-2 border rounded-lg bg-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
