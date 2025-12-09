@@ -5,6 +5,7 @@ import Home from '../Pages/Home/Home';
 import Login from '../Pages/Home/Authotication/Login';
 import Register from '../Pages/Home/Authotication/Register';
 import Dashboard from '../Layouts/Dashboard';
+import Profile from '../Pages/Profile/Profile';
 
 export const router=createBrowserRouter([
     {path:'/', element:<Mainlayout/>,
@@ -15,5 +16,9 @@ export const router=createBrowserRouter([
     {path:'/login', element:<Login></Login>},
     {path:'/register',element:<Register></Register>},
 
-    {path:'/dashboard', element:<Dashboard></Dashboard>}
+    {path:'/dashboard', element:<Dashboard></Dashboard>,
+        children:[
+            {path:'/dashboard/profile',element:<Profile></Profile>}
+        ]
+    }
 ])
