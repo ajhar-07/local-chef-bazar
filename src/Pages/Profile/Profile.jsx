@@ -4,7 +4,7 @@ import useRole from "../../Hooks/useRole";
 
 const Profile = () => {
   const { user, loading } = useAuth();
-  const [role, isReloading] = useRole();   // ← FIXED
+  const [role, isReloading] = useRole();  
 
   if (loading || isReloading) {
     return (
@@ -31,7 +31,7 @@ const Profile = () => {
             <h2 className="text-2xl font-medium">{user?.displayName}</h2>
             <p className="text-gray-500">{user?.email}</p>
             <p className="mt-1 inline-block px-3 py-1 rounded-full text-sm font-semibold bg-emerald-100 text-emerald-600">
-              Status: Active
+             {user?.status}
             </p>
           </div>
         </div>

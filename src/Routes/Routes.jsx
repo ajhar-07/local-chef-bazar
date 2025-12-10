@@ -6,6 +6,7 @@ import Login from '../Pages/Home/Authotication/Login';
 import Register from '../Pages/Home/Authotication/Register';
 import Dashboard from '../Layouts/Dashboard';
 import Profile from '../Pages/Profile/Profile';
+import Statistics from '../Pages/Statictics/Statistics';
 
 export const router=createBrowserRouter([
     {path:'/', element:<Mainlayout/>,
@@ -18,6 +19,8 @@ export const router=createBrowserRouter([
 
     {path:'/dashboard', element:<Dashboard></Dashboard>,
         children:[
+            {path:'/dashboard',element:<Statistics></Statistics>},
+            {path:'/dashboard/statistics',element:<Statistics></Statistics>},
             {path:'/dashboard/profile',element:<Profile></Profile>}
         ]
     }

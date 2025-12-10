@@ -8,10 +8,11 @@ const useRole = () => {
        const{data:role,isLoading:isReloading}=useQuery({
         enabled:!loading && !!user?.email,
         queryKey:['role',user?.email],
-        queryFn:async()=>{
-            const res=await axios.get(`http://localhost:5000/user/role/${user?.email}`)
-            return res.data.role
-        }
+       queryFn: async () => {
+  const res = await axios.get(`http://localhost:5000/user/role/${user?.email}`);
+  return res.data.role?.toLowerCase();
+}
+
        })
        return[role,isReloading]
 };
